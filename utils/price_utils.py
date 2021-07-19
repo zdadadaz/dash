@@ -2,7 +2,7 @@ import yfinance as yf
 from alpha_vantage.timeseries import TimeSeries
 from pprint import pprint
 import pandas as pd
-from utils.draw import plot_price
+from utils.draw import plot_price, plot_price_ind
 
 def alpha(ticker):
     ts = TimeSeries(key='L8WFWPCEBY7C91J4', output_format='pandas')
@@ -87,13 +87,17 @@ class Stocks:
     def update_one_fig(self, ticker, interval='1d',period='ytd'):
         for idx,t in enumerate(self.stock_list):
             if str(self.tickers[idx]) == str(ticker):
-                return plot_price(t._get_price(interval, period),'fig')
+                tmp = t._get_price(interval, period)
+                # plot_price_ind(tmp, 'fig')
+                return plot_price(tmp,'fig')
+                
 
     def update_all_fig(self, interval='1d',period='ytd'):
         res = {}
         if interval == '30m':
             period = '60d'
         for idx,t in enumerate(self.stock_list):
-            res[self.tickers[idx]] = plot_price(t._get_price(interval, period),'fig')
+            tmp = t._get_price(interval, period)
+            res[self.tickers[idx]] = plot_price(tmp,'fig')
         return res
 

@@ -1,2 +1,7 @@
 __pycache__
 stock.db
+
+backtrader/analyzers/__pycache__/*
+backtrader/strategies/__pycache__/*
+utils/__pycache__/*
+screener/*

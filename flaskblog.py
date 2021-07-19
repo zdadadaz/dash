@@ -33,9 +33,10 @@ df = allStocks.output_dayprice_all(df)
 dfw = pd.DataFrame.from_dict(connect_sqlite(dbName, 'allwatchlist'))
 watchStocks = Stocks(dfw['ticker'],'TW')
 
+suffix = 'AX'
 today = date.today()
 dfs = pd.read_csv('screener/{}.csv'.format(today))
-screenStocks = Stocks([str(i) for i in dfs['ticker']],'TW')
+screenStocks = Stocks([str(i) for i in dfs['ticker']],suffix)
 page_watch = layout_dash(dfw, dropid='interval-dropdown-watch', radid='period-radio-watch', graphid = 'ytd-graph-watch',tableid='table-watch-all') 
 page_hold = layout_dash(df, dropid='interval-dropdown', radid='period-radio', graphid = 'ytd-graph',tableid='table-hold-all') 
 page_screen = layout_dash(dfs, dropid='interval-dropdown-screen', radid='period-radio-screen', graphid = 'ytd-graph-screen',tableid='table-screen-all') 
